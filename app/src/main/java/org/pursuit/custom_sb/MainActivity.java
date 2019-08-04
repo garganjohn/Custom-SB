@@ -20,20 +20,30 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private CustomSound customSound;
+    private Button stopAllSounds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initCustomSounds(this);
-        setCLickListener(createSoundButtons());
+        setClickListener(createSoundButtons());
+        setUpStopButton(stopAllSounds);
     }
 
-//    private void initRecyclerView() {
-//        RecyclerView soundRecyclerView = findViewById(R.id.sound_recyclerview);
-//        soundRecyclerView.setAdapter(new SoundAdapter(createSoundButtons()));
-//        soundRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-//    }
+    private void setUpStopButton(Button stopAllSounds) {
+        stopAllSounds = findViewById(R.id.stop_all_sounds);
+        stopAllSounds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customSound.getSoundPool().autoPause();
+                if(customSound.getSound6().isPlaying()){
+                    customSound.getSound6().pause();
+                    customSound.getSound6().seekTo(0);
+                }
+            }
+        });
+    }
 
     private void initCustomSounds(Context c) {
         customSound = new CustomSound(c);
@@ -79,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         return soundButtons;
     }
 
-    private void setCLickListener(final List<Button> soundButtons) {
+    private void setClickListener(final List<Button> soundButtons) {
         for (int i = 0; i < soundButtons.size(); i++) {
             final int finalI = i;
             soundButtons.get(i).setOnClickListener(new View.OnClickListener() {

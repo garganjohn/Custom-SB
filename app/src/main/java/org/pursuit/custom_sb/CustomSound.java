@@ -6,6 +6,8 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.view.View;
 
+import java.util.Map;
+
 public final class CustomSound {
     private SoundPool soundPool;
     private MediaPlayer sound6;

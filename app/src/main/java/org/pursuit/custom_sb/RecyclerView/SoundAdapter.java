@@ -28,6 +28,7 @@ public class SoundAdapter extends RecyclerView.Adapter<SoundViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SoundViewHolder soundViewHolder, int i) {
+
         soundViewHolder.onBind(soundButtons.get(i));
     }
 

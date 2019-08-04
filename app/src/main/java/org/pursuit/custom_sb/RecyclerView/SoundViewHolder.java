@@ -19,11 +19,6 @@ public class SoundViewHolder extends RecyclerView.ViewHolder {
 
     void onBind(final Button soundButton) {
         //TODO
-        soundButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                customSound.playSound(v);
-            }
-        });
+
     }
 }

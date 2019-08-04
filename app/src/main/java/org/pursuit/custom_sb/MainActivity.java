@@ -1,5 +1,6 @@
 package org.pursuit.custom_sb;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -18,20 +19,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView soundRecyclerView;
-    private List<Button> soundButtons;
+    private CustomSound customSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initRecyclerView();
+        initCustomSounds(this);
+        setCLickListener(createSoundButtons());
     }
 
-    private void initRecyclerView() {
-        soundRecyclerView = findViewById(R.id.sound_recyclerview);
-        soundRecyclerView.setAdapter(new SoundAdapter(createSoundButtons()));
-        soundRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+//    private void initRecyclerView() {
+//        RecyclerView soundRecyclerView = findViewById(R.id.sound_recyclerview);
+//        soundRecyclerView.setAdapter(new SoundAdapter(createSoundButtons()));
+//        soundRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+//    }
+
+    private void initCustomSounds(Context c) {
+        customSound = new CustomSound(c);
+
     }
 
     private String[] getAllRawResources() {
@@ -50,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Button> createSoundButtons() {
-        soundButtons = new ArrayList<>();
+        List<Button> soundButtons = new ArrayList<>();
+
         Button soundButton1 = findViewById(R.id.sound_button1);
         soundButtons.add(soundButton1);
 
@@ -70,22 +77,18 @@ public class MainActivity extends AppCompatActivity {
         return soundButtons;
     }
 
-//    void createButtonZero() {
-//        buttonZero = findViewById(R.id.sound_btn_0);
-//        buttonZero.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mpZero = MediaPlayer.create(getApplicationContext(), R.raw.kyle_guy);
-//                mpZero.setVolume(100f, 100f);
-//                mpZero.start();
-//                mpZero.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                    @Override
-//                    public void onCompletion(MediaPlayer mp) {
-//                        mp.release();
-//                    }
-//                });
-//                Toast.makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    private void setCLickListener(final List<Button> soundButtons) {
+        for (int i = 0; i < soundButtons.size(); i++) {
+            final int finalI = i;
+            soundButtons.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    customSound.playSound(soundButtons.get(finalI));
+                }
+            });
+
+        }
+    }
+
+
 }

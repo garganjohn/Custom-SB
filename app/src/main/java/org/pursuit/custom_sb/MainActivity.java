@@ -14,9 +14,12 @@ import android.widget.Toast;
 import org.pursuit.custom_sb.RecyclerView.SoundAdapter;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView soundRecyclerView;
+    private List<Button> soundButtons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         soundRecyclerView = findViewById(R.id.sound_recyclerview);
-        soundRecyclerView.setAdapter(new SoundAdapter(getAllRawResources()));
+        soundRecyclerView.setAdapter(new SoundAdapter(createSoundButtons()));
         soundRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
     }
 
@@ -44,6 +47,27 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return names;
+    }
+
+    private List<Button> createSoundButtons() {
+        soundButtons = new ArrayList<>();
+        Button soundButton1 = findViewById(R.id.sound_button1);
+        soundButtons.add(soundButton1);
+
+        Button soundButton2 = findViewById(R.id.sound_button2);
+        soundButtons.add(soundButton2);
+
+        Button soundButton3 = findViewById(R.id.sound_button3);
+        soundButtons.add(soundButton3);
+
+        Button soundButton4 = findViewById(R.id.sound_button4);
+        soundButtons.add(soundButton4);
+
+        Button soundButton5 = findViewById(R.id.sound_button5);
+        soundButtons.add(soundButton5);
+
+
+        return soundButtons;
     }
 
 //    void createButtonZero() {

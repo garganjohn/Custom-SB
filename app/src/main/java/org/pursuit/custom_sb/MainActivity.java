@@ -1,6 +1,7 @@
 package org.pursuit.custom_sb;
 
 import android.media.MediaPlayer;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +17,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        CustomSound customSound = new CustomSound(this);
+        CustomSoundButton soundZero = new CustomSoundButton(this, 0, customSound);
+        ConstraintLayout container = findViewById(R.id.main_containter);
+        container.addView(soundZero, 1);
     }
 
     void createButtonZero() {

@@ -1,19 +1,30 @@
 package org.pursuit.custom_sb;
 
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.provider.MediaStore;
-import android.widget.Button;
+
+
+import androidx.annotation.Nullable;
 
 public class CustomSoundButton extends android.support.v7.widget.AppCompatButton {
-    private MediaPlayer customSound;
-    private String name;
+    private int name;
+    private CustomSound customSound;
 
 
-
-    public CustomSoundButton(Context context) {
+    public CustomSoundButton(Context context, int name, CustomSound customSound) {
         super(context);
+        this.customSound = customSound;
+        this.name = name;
 
     }
-void setAudio()
+
+    @Override
+    public void setOnClickListener(@Nullable OnClickListener l) {
+        new Runnable() {
+            @Override
+            public void run() {
+                customSound.startSound(name);
+            }
+        };
+        super.setOnClickListener(l);
+    }
 }

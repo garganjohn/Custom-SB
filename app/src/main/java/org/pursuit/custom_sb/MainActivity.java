@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         Button soundButton5 = findViewById(R.id.sound_button5);
         soundButtons.add(soundButton5);
 
+        Button soundButton6 = findViewById(R.id.sound_button6);
+        soundButtons.add(soundButton6);
 
         return soundButtons;
     }
@@ -90,5 +92,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        customSound.getSoundPool().release();
+        customSound.setSoundPool(null);
+        customSound.getSound6().release();
+        customSound.setSound6(null);
+    }
 }

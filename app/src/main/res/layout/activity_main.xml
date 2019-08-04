@@ -42,6 +42,12 @@
         android:layout_height="wrap_content"
         android:text="Slap"
         android:textSize="20sp" />
+    <Button
+        android:id="@+id/sound_button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wolf of Wall Street"
+        android:textSize="20sp" />
 
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.view.View;
 
 public final class CustomSound {
     private SoundPool soundPool;
+    private MediaPlayer sound6;
     private Context c;
     private int sound1, sound2, sound3, sound4, sound5;
 
@@ -17,11 +18,20 @@ public final class CustomSound {
         setSounds();
     }
 
-    public void startSound(String sound) {
-        switch (sound) {
-            case "kyle":
+    public MediaPlayer getSound6() {
+        return sound6;
+    }
 
-        }
+    public void setSound6(MediaPlayer sound6) {
+        this.sound6 = sound6;
+    }
+
+    public SoundPool getSoundPool() {
+        return soundPool;
+    }
+
+    public void setSoundPool(SoundPool soundPool) {
+        this.soundPool = soundPool;
     }
 
     void createBuilder() {
@@ -42,12 +52,14 @@ public final class CustomSound {
         sound3 = soundPool.load(c, R.raw.kyle_guy, 1);
         sound4 = soundPool.load(c, R.raw.shockwave, 1);
         sound5 = soundPool.load(c, R.raw.slap, 1);
+        sound6 = MediaPlayer.create(c, R.raw.wolfofwallstreet);
     }
 
     public void playSound(View v) {
         switch (v.getId()) {
             case R.id.sound_button1:
                 soundPool.play(sound1, 1, 1, 0, 0, 1);
+                //soundPool.autoPause();
                 break;
 
             case R.id.sound_button2:
@@ -65,6 +77,16 @@ public final class CustomSound {
             case R.id.sound_button5:
                 soundPool.play(sound5, 1, 1, 0, 0, 1);
                 break;
+            case R.id.sound_button6:
+                sound6.start();
+                sound6.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        sound6.release();
+                    }
+                });
+                break;
+
         }
     }
 }

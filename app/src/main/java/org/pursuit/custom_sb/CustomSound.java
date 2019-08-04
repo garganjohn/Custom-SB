@@ -1,47 +1,97 @@
 package org.pursuit.custom_sb;
 
 import android.content.Context;
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.view.View;
 
-public final class CustomSound  {
-    MediaPlayer mediaPlayer;
+import java.util.Map;
+
+public final class CustomSound {
+    private SoundPool soundPool;
+    private MediaPlayer sound6;
     private Context c;
+    private int sound1, sound2, sound3, sound4, sound5;
 
-    public CustomSound(Context context) {
-        this.c = context;
-        mediaPlayer = MediaPlayer.create(context, null);
+    public CustomSound(Context c) {
+        this.c = c;
+        createBuilder();
+        setSounds();
     }
 
-    public void startSound(int soundNum) {
-        switch (soundNum) {
-            case 0:
-                mediaPlayer.start();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+    public MediaPlayer getSound6() {
+        return sound6;
+    }
+
+    public void setSound6(MediaPlayer sound6) {
+        this.sound6 = sound6;
+    }
+
+    public SoundPool getSoundPool() {
+        return soundPool;
+    }
+
+    public void setSoundPool(SoundPool soundPool) {
+        this.soundPool = soundPool;
+    }
+
+    void createBuilder() {
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(5)
+                .setAudioAttributes(audioAttributes)
+                .build();
+    }
+
+    void setSounds() {
+        sound1 = soundPool.load(c, R.raw.airhorn, 1);
+        sound2 = soundPool.load(c, R.raw.gunshot, 1);
+        sound3 = soundPool.load(c, R.raw.kyle_guy, 1);
+        sound4 = soundPool.load(c, R.raw.shockwave, 1);
+        sound5 = soundPool.load(c, R.raw.slap, 1);
+        sound6 = MediaPlayer.create(c, R.raw.wolfofwallstreet);
+    }
+
+    public void playSound(View v) {
+        switch (v.getId()) {
+            case R.id.sound_button1:
+                soundPool.play(sound1, 1, 1, 0, 0, 1);
+                //soundPool.autoPause();
+                break;
+
+            case R.id.sound_button2:
+                soundPool.play(sound2, 1, 1, 0, 0, 1);
+                break;
+
+            case R.id.sound_button3:
+                soundPool.play(sound3, 1, 1, 0, 0, 1);
+                break;
+
+            case R.id.sound_button4:
+                soundPool.play(sound4, 1, 1, 0, 0, 1);
+                break;
+
+            case R.id.sound_button5:
+                soundPool.play(sound5, 1, 1, 0, 0, 1);
+                break;
+            case R.id.sound_button6:
+                sound6.start();
+                sound6.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mp) {
-                        mediaPlayer.release();
+                        sound6.release();
                     }
                 });
                 break;
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                break;
-            case 7:
-                break;
-            case 8:
-                break;
-            case 9:
-                break;
+
         }
     }
-
 }
+
+
+

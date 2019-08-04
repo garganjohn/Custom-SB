@@ -1,18 +1,22 @@
 package org.pursuit.custom_sb.RecyclerView;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.pursuit.custom_sb.R;
 
-public class SoundAdapter extends RecyclerView.Adapter<SoundViewHolder> {
-    private String[] rawResources;
+import java.util.List;
 
-    public SoundAdapter(String[] rawResources) {
-        this.rawResources = rawResources;
+public class SoundAdapter extends RecyclerView.Adapter<SoundViewHolder> {
+    private List<Button> soundButtons;
+
+    public SoundAdapter(List<Button> soundButtons) {
+        this.soundButtons = soundButtons;
     }
 
     @NonNull
@@ -24,11 +28,12 @@ public class SoundAdapter extends RecyclerView.Adapter<SoundViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SoundViewHolder soundViewHolder, int i) {
-soundViewHolder.onBind();
+
+        soundViewHolder.onBind(soundButtons.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return rawResources.length;
+        return soundButtons.size();
     }
 }

@@ -1,14 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_containter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:id="@+id/main_containter">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-   <android.support.v7.widget.RecyclerView
-       android:id="@+id/sound_recyclerview"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/stop_all_sounds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop all sounds"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/sound_button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Air-Horn"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/sound_button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gun-Shot"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/sound_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kyle"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/sound_button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shockwave"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/sound_button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Slap"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/sound_button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wolf of Wall Street"
+        android:textSize="20sp" />
+
+
+</LinearLayout>

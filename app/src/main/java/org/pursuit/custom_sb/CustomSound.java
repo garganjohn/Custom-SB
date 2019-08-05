@@ -6,13 +6,11 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.view.View;
 
-import java.util.Map;
-
 public final class CustomSound {
     private SoundPool soundPool;
-    private MediaPlayer sound6;
+    private MediaPlayer mpSound1;
     private Context c;
-    private int sound1, sound2, sound3, sound4, sound5;
+    private int sound1, sound2, sound3, sound4, sound5, sound6;
 
     public CustomSound(Context c) {
         this.c = c;
@@ -20,12 +18,12 @@ public final class CustomSound {
         setSounds();
     }
 
-    public MediaPlayer getSound6() {
-        return sound6;
+    public MediaPlayer getMpSound1() {
+        return mpSound1;
     }
 
-    public void setSound6(MediaPlayer sound6) {
-        this.sound6 = sound6;
+    public void setMpSound1(MediaPlayer mpSound1) {
+        this.mpSound1 = mpSound1;
     }
 
     public SoundPool getSoundPool() {
@@ -39,7 +37,7 @@ public final class CustomSound {
     void createBuilder() {
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .build();
 
         soundPool = new SoundPool.Builder()
@@ -54,7 +52,8 @@ public final class CustomSound {
         sound3 = soundPool.load(c, R.raw.kyle_guy, 1);
         sound4 = soundPool.load(c, R.raw.shockwave, 1);
         sound5 = soundPool.load(c, R.raw.slap, 1);
-        sound6 = MediaPlayer.create(c, R.raw.wolfofwallstreet);
+        sound6 = soundPool.load(c, R.raw.yer, 1);
+        mpSound1 = MediaPlayer.create(c, R.raw.wolfofwallstreet);
     }
 
     public void playSound(View v) {
@@ -79,14 +78,14 @@ public final class CustomSound {
             case R.id.sound_button5:
                 soundPool.play(sound5, 1, 1, 0, 0, 1);
                 break;
+
             case R.id.sound_button6:
-                sound6.start();
-                sound6.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        sound6.release();
-                    }
-                });
+                soundPool.play(sound6, 1, 1, 0, 0, 1);
+                break;
+
+            case R.id.sound_button7:
+                mpSound1.start();
+                mpSound1.setOnCompletionListener(mp -> mpSound1.release());
                 break;
 
         }

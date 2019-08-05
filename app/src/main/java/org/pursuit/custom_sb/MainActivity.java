@@ -3,10 +3,8 @@ package org.pursuit.custom_sb;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,21 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private void initCustomSounds(Context c) {
         customSound = new CustomSound(c);
 
-    }
-
-    private String[] getAllRawResources() {
-        Field fields[] = R.raw.class.getDeclaredFields();
-        String[] names = new String[fields.length];
-
-        try {
-            for (int i = 0; i < fields.length; i++) {
-                Field f = fields[i];
-                names[i] = f.getName();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return names;
     }
 
     private List<Button> createSoundButtons() {
